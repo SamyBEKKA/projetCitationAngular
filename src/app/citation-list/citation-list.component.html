@@ -1,0 +1,13 @@
+<h1 class="container">Liste des Citations</h1>
+<section class="container">
+    <div class="container mt-5">
+        <div *ngFor="let citation of citations; let i = index" class="card mb-3">
+          <div class="card-body">
+            <p class="card-text">{{ citation.texte }}</p>
+            <h5 class="card-title">{{ citation.name }}</h5>
+            <p class="card-text">{{ citation.date }}</p>
+            <button class="btn btn-danger" (click)="deleteCitation(i)">Supprimer</button>
+          </div>
+        </div>
+      </div>
+</section>
