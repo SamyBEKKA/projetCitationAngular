@@ -1,0 +1,18 @@
+<div class="container mt-5">
+    <h1>Ajouter une citation</h1>
+    <form (ngSubmit) ="onSubmit()" [formGroup]="form">
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Example textarea : </label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="texte" formControlName="texte" required required title="Entrez le texte de la citation" placeholder="Texte"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="author-name" class="form-label">Author : </label>
+      <input type="text" class="form-control" name="name" formControlName="name" required title="Entrez le nom de l'auteur" placeholder="Auteur">
+    </div>
+    <div class="mb-3">
+      <label for="date" class="form-label">Date : </label>
+      <input type="date" class="form-control"  name="date"formControlName="date" placeholder="dd-MM-yyyy" required title="Sélectionnez la date de la citation">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>

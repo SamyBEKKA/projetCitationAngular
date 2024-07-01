@@ -1,9 +1,14 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule, NgModel, NgModelGroup } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, FormsModule, NgForm, NgModel, NgModelGroup, ValidationErrors, Validators } from '@angular/forms';
 import { CitationListComponent } from '../citation-list/citation-list.component';
-import { citation } from '../entities';
+import { CitationService } from '../citation.service';
 
+export const motsInterdit= ( control:AbstractControl):
+ValidationErrors | null => {
+  const mots  = ["lol","caca"]
+  return mots.includes(control.value) ? { interdit : "Ce mot est interdit"} : null
+}
 @Component({
   selector: 'app-creation-citations',
   standalone: true,
@@ -13,27 +18,26 @@ import { citation } from '../entities';
   providers:[DatePipe],
 })
 export class CreationCitationsComponent {
-  citations: citation[] = [];
+  // citations: citation[] = [];
+  
+
+  constructor(private datePipe: DatePipe) {}
+
+  service = inject(CitationService)
+  // id:number = 0;
   name: string = '';
   texte: string = "";
   date : string = "";
 
-  constructor(private datePipe: DatePipe) {}
+  public form:FormGroup = new FormGroup ({
+    name: new FormControl('', {validators:[Validators.required, Validators.minLength(8), motsInterdit]}),
+    texte : new FormControl("", {validators: [Validators.required, Validators.minLength(4), motsInterdit]})
+  })
 
-  onSubmit():void{
-    const formattedDate = this.datePipe.transform(this.date, 'dd/MM/yyyy');
-    const newCitation = {
-      name: this.name,
-      texte: this.texte,
-      date: formattedDate 
-    };
-    this.citations.push(newCitation); 
-    console.log('Nouvelle citation ajoutée:', newCitation);
-    this.resetForm();
-  }
-  resetForm(): void {
-    this.name = '';
-    this.texte = '';
-    this.date = '';
+  onSubmit(form:NgForm){
+    if(form.valid){
+      this.service.postCitation(form.value);
+      form.reset();
+    }
   }
 }

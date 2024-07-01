@@ -1,9 +1,16 @@
 <!-- <h1 class="container">Welcome Citation</h1> -->
 <section class="container">
-  <app-citation-list></app-citation-list>
+
   <app-creation-citations></app-creation-citations>
+<br>
+<div>
+  <input type="text" [(ngModel)]="terms" name="terms"  placeholder="Rechercher par auteur">
+  <ul *ngFor="let citation of citations | filter:terms ">
+    <li>{{citation.name}}, {{citation.texte}}</li>
 
-
+  </ul>
+</div>
+  <app-citation-list></app-citation-list>
   <!-- <div *ngFor="let citation of citations" class=" border border-2">
     <p><strong>Texte:</strong> {{ citation.texte }}</p>
     <p><strong>Auteur:</strong> {{ citation.name }}</p>

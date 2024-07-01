@@ -1,0 +1,7 @@
+<div class="container">
+    <label for="price">Prix HT</label>
+    <input type="number" id="price" [(ngModel)]="price">
+  <div>
+    <p>Prix TTC : {{ price | tva:0.20 }}</p>
+  </div>
+</div>

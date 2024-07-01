@@ -1,18 +1,18 @@
 <div class="container mt-5">
   <h1>Ajouter une citation</h1>
-<form (ngSubmit)="onSubmit()">
-<div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label">Example textarea : </label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="texte" name="texte" required required title="Entrez le texte de la citation" placeholder="Texte"></textarea>
+  <form #formCitation ="ngForm" (ngSubmit) = "onSubmit(formCitation)">
+  <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Example textarea : </label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="texte" [(ngModel)]="texte" required required title="Entrez le texte de la citation" placeholder="Texte"></textarea>
   </div>
   <div class="mb-3">
     <label for="author-name" class="form-label">Author : </label>
-    <input type="text" class="form-control" [(ngModel)]="name" name="name" required title="Entrez le nom de l'auteur" placeholder="Auteur">
+    <input type="text" class="form-control" name="name" [(ngModel)]="name" required title="Entrez le nom de l'auteur" placeholder="Auteur">
   </div>
   <div class="mb-3">
     <label for="date" class="form-label">Date : </label>
-    <input type="date" class="form-control" [(ngModel)]="date" name="date" placeholder="dd-MM-yyyy" required title="Sélectionnez la date de la citation">
+    <input type="date" class="form-control"  name="date" [(ngModel)]="date" placeholder="dd-MM-yyyy" required title="Sélectionnez la date de la citation">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+  </form>
 </div>
